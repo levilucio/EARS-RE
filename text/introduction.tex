@@ -20,22 +20,18 @@ can be turned into fully precise formal specifications. Such formal
 specifications can then be used for purposes such as \emph{code synthesis},
 \emph{formal verification} or \emph{test generation}.
 
-The work we present here is motivated by the IETS3 project\footnote{IETS3 was
+The work we present here is motivated by the \iets project\footnote{IETS3 was
 funded by the German Federal Ministry of Education and Research under code
 01IS15037A/B} ran recently by our company on the construction of languages for
-requirements engineering. With IETS3 we have been able to synthesise code
+requirements engineering. With \iets we have been able to synthesise code
 directly from \ears specifications. To that end, we have transformed \ears into
-Linear Temporal Logic (LTL), a mathematical formalism that allows expressing
+Linear Temporal Logic (\ltl), a mathematical formalism that allows expressing
 temporal dependencies between the states of a system. This transformation is
 part of the \earsctrl environment~\cite{earsctrlProcess} that allows
 synthesizing code directly from requirements expressed in
 \ears~\cite{LucioRCA16,LucioRAM17}.
 
-In this paper we will elaborate on the transformation between \ears 
-
-\begin{itemize} 
-  \item Motivate why it is important for formalize EARS
-  \item Talk about context, IETS3 project
-  \item Specifically EARS for controllers, domain where EARS shines 
-  \item Formal language of choice: LTL
-\end{itemize}
+In this paper we will elaborate on how this translation has been implemented,
+indentify some of the hurdles found when building such a translation and
+extrapolate some of our lessons learned into the bigger picture of having a
+formal couterpart to \ears.
