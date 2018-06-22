@@ -1,0 +1,83 @@
+\documentclass[conference]{IEEEtran}
+\IEEEoverridecommandlockouts
+% The preceding line is only needed to identify funding in the first footnote. If that is unneeded, please comment it out.
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xspace}
+\usepackage{url}
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+    
+% Put edit comments in a really ugly standout display
+\usepackage{times}
+ 
+\newcommand{\todo}[1]{\textbf{\textcolor{red}{TODO: #1}}} 
+% Macros for proof-reading & corrections
+\usepackage[normalem]{ulem} % for \sout  
+\usepackage{xcolor}  
+
+\usepackage{ifthen}
+\usepackage{amssymb} 
+
+\usepackage{backnaur}
+ 
+\newboolean{showcomments}
+\setboolean{showcomments}{true} % toggle to show or hide comments
+\ifthenelse{\boolean{showcomments}}     
+  {\newcommand{\nb}[2]{   
+    \fcolorbox{gray}{yellow}{\bfseries\sffamily\scriptsize#1}
+    {$\blacktriangleright$#2$\blacktriangleleft$}
+   }
+   \newcommand{\version}{\emph{\scriptsize$-$working$-$}}  
+  }
+  {\newcommand{\nb}[2]{} 
+   \newcommand{\version}{} 
+  } 
+
+\newcommand\levi[1]{\nb{Levi}{\textcolor{teal}{#1}}} 
+\newcommand\sudeep[1]{\nb{Saad}{\textcolor{teal}{#1}}} 
+
+\newcommand{\ears}{\textsc{Ears}\xspace}
+
+\newtheorem{definition}{Definition} 
+
+\begin{document} 
+  
+\title{Formalizing EARS} 
+% {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
+% should not be used}
+% \thanks{Identify applicable funding agency here. If none, delete this.}
+ 
+\author{\IEEEauthorblockN{Levi L\'ucio, Saad Bin Abid, Tahira Iqbal }
+\IEEEauthorblockA{\textit{fortiss GmbH} \\  
+\textit{Guerickestrasse 25}\\
+Munich, Germany \\ 
+\{lucio, abid, iqbal\}@fortiss.org  
+} 
+
+}
+
+\maketitle 
+
+
+\begin{abstract} 
+\input{text/abstract.tex} 
+\end{abstract} 
+
+\input{text/introduction.tex} 
+ 
+\input{text/from_ears_to_LTL.tex}
+
+\input{text/context.tex}
+
+\input{text/open_issues_discussion.tex}
+
+\input{text/conclusion.tex} 
+
+\bibliographystyle{abbrv} 
+\bibliography{./references}
+
+\end{document}
