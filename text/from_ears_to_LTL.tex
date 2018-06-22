@@ -15,6 +15,46 @@ The \ears requirements for such a controller are depicted in
 \label{fig:reqs_motor}
 \end{figure}
 
+\begin{figure*}
+\begin{tabular}{ |c|c|c| } 
+ \hline
+Ubiquitous & \textbf{The} $\langle$\emph{system}$\rangle$ \textbf{shall}
+$\langle$\emph{response}$\rangle$ & $\mathbf{G}(response)$
+\\
+  \hline
+Event-Driven & \textbf{When} $\langle$\emph{trigger}$\rangle$ \textbf{the}
+$\langle$\emph{system}$\rangle$\textbf{shall} $\langle$\emph{response}$\rangle$
+& $\mathbf{G}(trigger\rightarrow \textbf{X}(response))$
+\\
+ \hline 
+State-Driven &  \textbf{While} $\langle$\emph{in state}$\rangle$ \textbf{the}
+$\langle$\emph{system}$\rangle$ \textbf{shall} $\langle$\emph{response}$\rangle$
+& $\mathbf{G}(\text{\emph{in state}}\rightarrow response)$ \\
+ \hline
+
+Option &  \textbf{Where} $\langle$\emph{feature}$\rangle$ \textbf{the}
+$\langle$\emph{system}$\rangle$ \textbf{shall} $\langle$\emph{response}$\rangle$
+& $\mathbf{G}(\text{\emph{feature}}\rightarrow response)$ \\
+ \hline
+ 
+Complex &  \textbf{While} $\langle$\emph{in state}$\rangle$, \textbf{when}
+$\langle$\emph{trigger}$\rangle$, \textbf{the} $\langle$\emph{system}$\rangle$
+\textbf{shall} $\langle$\emph{response}$\rangle$ & $\mathbf{G}((\text{\emph{in
+state}} \land \text{\emph{trigger}})\rightarrow \textbf{X}(response))$ \\
+ \hline
+ 
+Unwanted &  \textbf{If} $\langle$\emph{preconditions}$\rangle$
+$\langle$\emph{trigger}$\rangle$, \textbf{the} $\langle$\emph{system}$\rangle$
+\textbf{shall} $\langle$\emph{response}$\rangle$ &
+$\mathbf{G}((\text{\emph{preconditions}} \land \text{\emph{trigger}})\rightarrow
+\textbf{X}(response))$ \\
+ \hline
+ 
+\end{tabular}
+\caption{Translation between \ears templates and \ltl}
+\label{fig:translation_ears_ltl}
+\end{figure*}
+
 Let us now build a set of \ltl formulas that reflect the semantics of these
 requirements. \ltl builds on propositional logic by adding temporal operators to
 it. Formulas in \ltl are particularly appropriate to express properties of
@@ -28,19 +68,28 @@ formally introduce \ltl here, but will rather explain the formulas that we
 introduce via our running example.
 
 By looking carefully at the example in \fig\ref{fig:reqs_motor} it is possible
-to understand that all requirements are given in the form of \ears event-driven
-templates. Take for instance Req1. The translation of Req1 into \ltl would be as
-follows:
+to understand that all requirements are given in the form of \ears
+\emph{event-driven} templates. Take for instance Req1. The translation of Req1
+into \ltl would be as follows:
 
-\begin{multline}
-\mathbf{G}(start_button_pressed \rightarrow\\ \textbf{X}(som\land
-stst))
-\end{multline}
+\begin{multline*}
+\mathbf{G}(\text{\emph{start button pressed}} \rightarrow\\
+\textbf{X}(\text{\emph{start oil motor}}\land \text{\emph{start 10 sec timer}}))
+\end{multline*}
 
+The mathematical expression above reads as: \emph{globally}
+during a run of the system (temporal operator $\mathbf{G}$), if the system
+receives the \emph{start button} event, then in the \emph{next} moment
+(temporal operator $\mathbf{X}$) the motor will be started as well a 10 second timer.
 
-
-\begin{itemize}
-  \item A specification of a motor controller in EARS-CTRL
-  \item Simple introduction to LTL
-  \item Naive transformation of the motor requirements into LTL
-\end{itemize}
+In the table in \fig\ref{fig:translation_ears_ltl} we present a set of rules for
+transforming the \ears templates presented in~\cite{EARS09} into \ltl. Note that
+the transformation rules are relatively regular and are designed such that for
+every state in a run of the system some output is triggered if a state satisfies
+a given condition. In the \emph{ubiquitous} case, all states in the run have to
+produce the response, which is enforced by the $\mathbf{G}$ operator. In the
+\emph{state-driven} and \emph{option} case, the response is produced only if the
+state meets a certain condition or a certain feature of the system is enabled.
+Finally, the \emph{event-driven}, \emph{complex} and \emph{unwanted} patterns
+are different in the sense that the response is only appears in the moment following
+the arrival of the trigger (as imposed by the $\mathbf{X}$ operator).
