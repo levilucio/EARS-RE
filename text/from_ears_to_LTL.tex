@@ -23,7 +23,7 @@ $\langle$\emph{response}$\rangle$ & $\mathbf{G}(response)$
 \\
   \hline
 Event-Driven & \textbf{When} $\langle$\emph{trigger}$\rangle$ \textbf{the}
-$\langle$\emph{system}$\rangle$\textbf{shall} $\langle$\emph{response}$\rangle$
+$\langle$\emph{system}$\rangle$ \textbf{shall} $\langle$\emph{response}$\rangle$
 & $\mathbf{G}(trigger\rightarrow \textbf{X}(response))$
 \\
  \hline 
@@ -63,9 +63,11 @@ over time. For example, one may want to state that always when a motor is on,
 then a thermostat is measuring its temperature. Or that, while the start button
 is pressed then the starter engine will attempt to run the main engine. Or
 even, that eventually the motor will stop. \ltl incorporates operators to
-describe these situations. Due to space limitations we will not
-formally introduce \ltl here, but will rather explain the formulas that we
-introduce via our running example.
+describe these situations. Due to space limitations we will refrain from 
+formally introduce \ltl here, but will rather explain the parts of it that are
+relevant to our presentation. \ltl was first introduced by Pnueli in
+1977~\cite{Pnueli77} and introductions to it abound in the literature and
+internet.
 
 By looking carefully at the example in \fig\ref{fig:reqs_motor} it is possible
 to understand that all requirements are given in the form of \ears
@@ -82,8 +84,8 @@ during a run of the system (temporal operator $\mathbf{G}$), if the system
 receives the \emph{start button} event, then in the \emph{next} moment
 (temporal operator $\mathbf{X}$) the motor will be started as well a 10 second timer.
 
-In the table in \fig\ref{fig:translation_ears_ltl} we present a set of rules for
-transforming the \ears templates presented in~\cite{EARS09} into \ltl. Note that
+In the table in \fig\ref{fig:translation_ears_ltl} we present a generic set of
+rules for transforming the \ears templates presented in~\cite{EARS09} into \ltl. Note that
 the transformation rules are relatively regular and are designed such that for
 every state in a run of the system some output is triggered if a state satisfies
 a given condition. In the \emph{ubiquitous} case, all states in the run have to
