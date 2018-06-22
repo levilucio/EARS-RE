@@ -1,6 +1,39 @@
 \section{Introduction and Problem Statement}
 
-\begin{itemize}
+\ears~\cite{EARS09} has been designed at Rolls-Royce having in mind helping
+requirements engineers to specify requirements that are as unambiguous, complete
+and objective as possible -- while being written in natural language.
+Technically architecting and writing software is an expensive task.
+Misunderstandings in communicating requirements to architects and developers
+amount to using precious software development resources in an unfruitful manner,
+leading to project overbudgeting and/or failure~\cite{chaos:2014}. Mavin \etal
+have shown with their work that, by using a simple set of template english
+sentences for specifying requirements, ambiguity, partiality and subjectivity
+can be significantly reduced in textual requirements, even for large
+specifications~\cite{EARS10,EARS16}.
+
+A byproduct of having requirements written in a simple subset of natural
+language is that automation becomes more possible. The regularity of \ears lends
+itself well to mathematical treatment and, given the wealth of research in
+formal methods, it is only reasonable to investigate how \ears specifications
+can be turned into fully precise formal specifications. Such formal
+specifications can then be used for purposes such as \emph{code synthesis},
+\emph{formal verification} or \emph{test generation}.
+
+The work we present here is motivated by the IETS3 project\footnote{IETS3 was
+funded by the German Federal Ministry of Education and Research under code
+01IS15037A/B} ran recently by our company on the construction of languages for
+requirements engineering. With IETS3 we have been able to synthesise code
+directly from \ears specifications. To that end, we have transformed \ears into
+Linear Temporal Logic (LTL), a mathematical formalism that allows expressing
+temporal dependencies between the states of a system. This transformation is
+part of the \earsctrl environment~\cite{earsctrlProcess} that allows
+synthesizing code directly from requirements expressed in
+\ears~\cite{LucioRCA16,LucioRAM17}.
+
+In this paper we will elaborate on the transformation between \ears 
+
+\begin{itemize} 
   \item Motivate why it is important for formalize EARS
   \item Talk about context, IETS3 project
   \item Specifically EARS for controllers, domain where EARS shines 
