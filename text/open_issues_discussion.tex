@@ -1,13 +1,40 @@
 \section{Open Issues and Discussion}
-
+The results obtained by utilizing EARs in the context of IETS3 are
+promising. In particular, EARs being utilized, 1) as a structured
+requirements writing language as opposed to writing in natural language and, 2)
+to do automatic code synthesis from EARs specifications. However, using EARs in
+our context have also led us to have a list of interesting open issues and
+observations.
+The following is a non-exhaustive list of open issues of EARs
+being utilized in the context of IETS3,
 \begin{itemize}
   \item Limited scope of translation controller generation. E.g. dealing with
-  parameters is not taken care of.
+  parameters is not taken care of. (Is this an extensibility issue? can we
+  solve it by extending the language with parameters? is this an observation?)
   \item Covering the gap between informal and formal -- how far can we get
-  without losing implicit information.
-  \item Can it be generalized?
+  without losing implicit information. Most of the organizations write
+  requirements in an unstructured/natural language. one of our
+  observations is that it is difficult for the companies to view immediate
+  benefits of adopting a structured/template language like EARs. For that
+  purpose, we would like to investigate further on how to close the gap between
+  natural/informal requirements and structured/template language like EARs so
+  that there is a minimal loss of information.
+  \item How generalizable is our approach? At present, we have applied our
+  approach for automatic code synthesis in the controller domain. We would like to investigate if our approach can
+  be generalized enough and can be utilized in other domains (e.g., writing test
+  cases).
+  \item Model checking is the next step. We would further like to investigate
+  how EARs can be helpful in performing the model checking.
   \item Order is often important. It can be deduced from the context, but should
-  there be an implicit order?
-  \item Model checking is the next step
-  \item How generalizable is our approach?
+  there be an implicit order? At present, we have written requirements using
+  EARs for controller generation purpose where the writing in a particular order might not that
+  important. However, it would be interesting to investigate further as to how
+  to prioritize/order the requirements when written in EARs for other domains?
+  FOr instance, this might be helpful in order to run test suites attached to
+  high-priority requirements.
+  \item Requirements are often not independent, we have observed during our
+  investigations that there is not an explicit way of having/managing
+  dependencies between requirements when written in EARs.
+  \item At present, EARs allow only discrete events (at any instance in time
+  as binary ON/OFF), how to have EARs for continuous (real-time) events in time? 
 \end{itemize}
