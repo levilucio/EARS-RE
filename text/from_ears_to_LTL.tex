@@ -27,7 +27,16 @@ describe these situations. Due to space limitations we will not
 formally introduce \ltl here, but will rather explain the formulas that we
 introduce via our running example.
 
-If we now turn our attention the example in 
+By looking carefully at the example in \fig\ref{fig:reqs_motor} it is possible
+to understand that all requirements are given in the form of \ears event-driven
+templates. Take for instance Req1. The translation of Req1 into \ltl would be as
+follows:
+
+\begin{multline}
+\mathbf{G}(start_button_pressed \rightarrow\\ \textbf{X}(som\land
+stst))
+\end{multline}
+
 
 
 \begin{itemize}
