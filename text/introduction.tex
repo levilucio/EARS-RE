@@ -1,15 +1,17 @@
 \section{Introduction and Problem Statement}
+\label{sec:introduction}
 
 \ears~\cite{EARS09} has been designed at Rolls-Royce having in mind helping
 requirements engineers to specify requirements that are as unambiguous, complete
 and objective as possible -- while being written in natural language.
-Technically architecting and writing software is an expensive task.
-Misunderstandings in communicating requirements to architects and developers
-amount to using precious software development resources in an unfruitful manner,
-leading to project overbudgeting and/or failure~\cite{chaos:2014}. Mavin \etal
-have shown with their work that, by using a simple set of template english
-sentences for specifying requirements, ambiguity, partiality and subjectivity
-can be significantly reduced in textual requirements, even for large
+It is well understood that architecting and writing software are
+expensive tasks. Misunderstandings in communicating requirements to architects
+and developers amount to using precious software development resources in an
+unfruitful manner -- leading to projects running over budget or simply
+failing~\cite{chaos:2014}. Mavin \etal have shown with their work that, by using
+a simple set of templated English sentences for specifying requirements,
+ambiguity, partiality and subjectivity can be significantly reduced in textual
+requirements. They have shown this holds even for large
 specifications~\cite{EARS10,EARS16}.
 
 A byproduct of having requirements written in a simple subset of natural
@@ -18,20 +20,29 @@ itself well to mathematical treatment and, given the wealth of research in
 formal methods, it is only reasonable to investigate how \ears specifications
 can be turned into fully precise formal specifications. Such formal
 specifications can then be used for purposes such as \emph{code synthesis},
-\emph{formal verification} or \emph{test generation}.
+\emph{formal verification} or even \emph{test case generation}.
+Teufl~\cite{Teufl17} explicitly states in her PhD thesis that having the means
+to transform requirements (and in particular \ears requirements) into formal
+specifications would provide ground truths. These could then be used for formal
+verification and consistence checking during the requirements gathering
+process.
 
 The work we present here is motivated by the \iets project\footnote{IETS3 was
 funded by the German Federal Ministry of Education and Research under code
-01IS15037A/B} ran recently by our company on the construction of languages for
-requirements engineering. With \iets we have been able to synthesise code
-directly from \ears specifications. To that end, we have transformed \ears into
-Linear Temporal Logic (\ltl), a mathematical formalism that allows expressing
-temporal dependencies between the states of a system. This transformation is
-part of the \earsctrl environment~\cite{earsctrlProcess} that allows
-synthesizing code directly from requirements expressed in
-\ears~\cite{LucioRCA16,LucioRAM17}.
+01IS15037A/B.} ran recently by our company on the construction of languages for
+requirements engineering. With \iets we have been able to synthesize software
+controllers directly from \ears specifications. To that end, we have transformed
+\ears into Linear Temporal Logic (\ltl), a mathematical formalism that allows expressing
+temporal dependencies between the states of a system. The transformation we
+present in this paper has been implemented and is part of the \earsctrl
+environment also developed in the context of the \iets project. Note that, while
+the \earsctrl environment has been
+described in ~\cite{earsctrlProcess,LucioRCA16,LucioRAM17}, this short paper
+aims systematically provides an algorithm for the transformation from \ears
+to \ltl and extracts general lessons from the implementation of that
+transformation.
 
-In this paper we will elaborate on how this translation has been implemented,
-identify some of the hurdles found when building such a translation and
-extrapolate some of our lessons learned into the bigger picture of having a
+In this short paper we will elaborate on how this translation has been
+implemented, identify some of the hurdles found when building such a translation and
+extrapolate some lessons we have learned into the bigger picture of having a
 formal counterpart to \ears.

@@ -1,7 +1,95 @@
 \section{The Importance of Context}
+\label{sec:context}
 
-\begin{itemize}
-  \item Why a naive translation does not work
-  \item The need to add context
-  \item Adding context and new axioms
-\end{itemize}
+While the translation we have presented in \sect\ref{sec:formalization}
+provides a boilerplate to transform \ears into \ltl, the rules given in
+\tab\ref{fig:translation_ears_ltl} are naive regarding the interaction between
+the complete set of requirements in an \ears specification. For example, if one
+take into consideration the transformation rule for \emph{Event-Driven} requirements, the \ltl formlula
+corresponding to those will only state that in the moment immediately after the
+\emph{trigger} is received, the \emph{response} will be given. However,
+the requirement states nothing about the life of the system after
+that moment. It is reasonable to ask questions such as:
+
+\begin{enumerate}
+  \item after a \emph{trigger} is received, will the \emph{response}
+  keep produced by the system for some period?
+  \label{q1}
+  \item if so, until when?
+  \label{q2}
+\end{enumerate}
+
+While it is challenging to come up with a generic answer for these questions,
+we will attempt to describe a solution for the case in which such a specification is
+used for code synthesis, as is done in our \earsctrl tool.
+
+As mentioned in \sect\ref{sec:introduction}, \earsctrl was built to synthesize
+software controllers directly from requirements written in \ears. Software
+controllers receive input from \emph{sensors} and produce output on
+\emph{actuators}. By orchestrating those signals a software controller
+controls the operation of a machine, such as the system of motors presented in
+\fig\ref{fig:reqs_motor}.
+
+Coming back to questions \ref{q1} and \ref{q2} above, let us attempt to answer
+then by analysing a concrete example based on our motor controller case study.
+Part of \textsf{Req1} states that when the \emph{start button} is pressed then
+the \emph{oil motor} will start. It is assumed that the motor will continue to
+be on until it is shutdown\footnote{Note that we assume that $\text{\emph{start
+motor oil}} = \neg(\text{\emph{stop motor oil}})$. In \earsctrl this is
+explicitely expressed in a glossary accompanying the requirements in
+\fig\ref{fig:reqs_motor}.}, which can only happen if \textsf{Req4} applies
+(meaning the \emph{stop button} has been pressed).
+However, this is information that can only be deduced by taking \textsf{Req4}
+into consideration.
+
+In order to incorporate this contextual information in an \ltl specification,
+static analysis of the \ears requirements becomes necessary. Such a static
+analysis is embodied in the algorithm in \fig\ref{algo:staticanalysis}. The
+algorithm calculates which triggers exist in other \ears requirements that
+should be taken into consideration during the translation and accumulates them
+in the $untilClause$ set. The body of the algorithm goes through all other
+requirements in the specification and checks whether the responses overlap, in
+which case their \emph{triggers} are added to the $untilClause$ set. Such
+a static analysis needs to be done for all \ears templates in
+\tab\ref{fig:translation_ears_ltl}, except for the \emph{Ubiquitous} template --
+in which case the response should in any case always be present in the system.
+
+\begin{figure}
+\begin{algorithmic}
+	\STATE $untilClause = \emptyset$
+	\STATE $currentReq = \text{requirement being transformed}$
+	\STATE $contextReq = \text{first requirement different from } currentReq$
+    \WHILE{not all context requirements have been
+    processed}
+    	\IF{$currentReq.responses \cap contextReq.responses$}
+    	        \STATE $untilClause = untilClause \cup {contextReq.trigger}$
+    	\ENDIF
+	\ENDWHILE
+	\caption{Algorithm to calculate contextual information}
+	\label{algo:staticanalysis}
+\end{algorithmic}
+\end{figure}
+
+If we now revisit the translation of \textsf{Req1} to include contextual
+information calculated by the static analysis algorithm, we can now produce the
+following \ltl formula:
+
+\begin{multline*} 
+\mathbf{G}(\text{\emph{start button pressed}} \rightarrow\\
+(\mathbf{X}(\text{\emph{start oil motor}}\land \text{\emph{start 10 sec
+timer}})\\ \mathbf{U} \text{\emph{ stop button pressed}}))
+\end{multline*}
+
+The $\mathbf{U}$ operator in the formula enforces that the \emph{start motor on}
+actuator will be left on $\mathbf{U}$ntil the \emph{stop button} is pressed.
+Note that the \ltl formula contains only one proposition after the until operator.
+This is in general not the case for the algorithm \fig\ref{algo:staticanalysis},
+as more than one proposition can be accumulated in the $untilClause$ set -- in
+which case the propositions after the until operator appear disjuncted in
+the corresponding generated \ltl formula.
+
+% 
+% \begin{itemize}
+%   \item $UntilClause = \emptyset$
+%   \item $forall req $
+% \end{itemize}

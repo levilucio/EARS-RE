@@ -20,9 +20,9 @@
 \usepackage{xcolor}  
 
 \usepackage{ifthen}
-\usepackage{amssymb} 
+\usepackage{amssymb}
 
-\usepackage{backnaur}
+\usepackage{algorithmic}
   
 \newboolean{showcomments}
 \setboolean{showcomments}{true} % toggle to show or hide comments
@@ -45,22 +45,26 @@
 \newcommand{\earsctrl}{\textsc{Ears-Ctrl}\xspace}
 \newcommand{\ltl}{\textsc{Ltl}\xspace}
 \newcommand{\iets}{\textsc{Iets3}\xspace}
-\newcommand{\fig}{figure\xspace} 
+\newcommand{\fig}{\text{Figure}\xspace}
+\newcommand{\sect}{\text{section}\xspace} 
+\newcommand{\tab}{\text{table}\xspace}
+\newcommand{\question}{\text{question}\xspace} 
+\newcommand{\eg}{\text{e.g.}\xspace} 
 
 \newtheorem{definition}{Definition} 
 
-\begin{document} 
+\begin{document}  
   
-\title{Formalizing EARS} 
+\title{Formalizing EARS -- First Impressions}
 % {\footnotesize \textsuperscript{*}Note: Sub-titles are not captured in Xplore and
 % should not be used}
 % \thanks{Identify applicable funding agency here. If none, delete this.}
  
-\author{\IEEEauthorblockN{Levi L\'ucio, Saad Bin Abid, Tahira Iqbal }
+\author{\IEEEauthorblockN{Levi L\'ucio, Tahira Iqbal }
 \IEEEauthorblockA{\textit{fortiss GmbH} \\  
 \textit{Guerickestrasse 25}\\
 Munich, Germany \\ 
-\{lucio, abid, iqbal\}@fortiss.org  
+\{lucio, iqbal\}@fortiss.org  
 } 
 
 }
@@ -79,9 +83,7 @@ Munich, Germany \\
 \input{text/context.tex}
 
 \input{text/open_issues_discussion.tex} 
-
-\input{text/conclusion.tex}  
-
+ 
 \bibliographystyle{abbrv} 
 \bibliography{./references}
 
